@@ -19,7 +19,7 @@ def convert_to_percents(n):
 
 def add_arrow(n):
     if round(n, 2) == 0:
-        return YELLOW + '±0' + RESET
+        return YELLOW + '~0' + RESET
     if n > 0:
         return GREEN + '+%s▲' % round(n, 2) + RESET
     else:
