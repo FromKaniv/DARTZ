@@ -29,7 +29,7 @@ class Player:
             elif symbol == 'b':
                 score += self.props.lose
             elif symbol.isdigit:
-                score += int(symbol) ** self.props.exponent * self.props.coeff
+                score += (10-int(symbol) if self.props.antidartz else int(symbol)) ** self.props.exponent * self.props.coeff
 
         return score
 

@@ -34,7 +34,7 @@ class App:
         crown = ' ' if (self.engine.move == 0 or self.engine.who_moves != self.engine.leaderboard[0]) else ' 👑 '
 
         print(f'{WHITE}---{crown}{player.props.name}{crown}---')
-        print(f'{WHITE}|{RESET} {'Бали:'.ljust(15)}{WHITE}%s\t%s' % (player.stats['score'], add_arrow(player.stats['income'])))
+        print(f'{WHITE}|{RESET} {'Бали:'.ljust(15)}{WHITE}%s\t%s' % (round(player.stats['score'], 2), add_arrow(player.stats['income'])))
         print(f'{WHITE}|{RESET} {'СерЗар:'.ljust(15)}{WHITE}%s\t%s' % (
         round(player.stats['avg'], 2), add_arrow(player.stats['avg_delta'])))
         print(f'{WHITE}|{RESET} {'Промахи:'.ljust(15)}{WHITE}%s/%s\t%s' % (
@@ -209,7 +209,7 @@ class App:
                 if player.stats['reached']:
                     print(f'%s. {emoji}{YELLOW if i == 1 else WHITE}%s{WHITE}🏁 Фінішував 🏁' % (i, player.props.name.ljust(10)))
                 else:
-                    print(f'%s. {emoji}{YELLOW if i == 1 else WHITE}%s{WHITE}%s %s' % (i, player.props.name.ljust(10), player.stats['score'], add_arrow(player.stats['income']) ))
+                    print(f'%s. {emoji}{YELLOW if i == 1 else WHITE}%s{WHITE}%s %s' % (i, player.props.name.ljust(10), round(player.stats['score'], 2), add_arrow(player.stats['income']) ))
         else:
             for i, player in enumerate(leaderboard, 1):
                 if i == 1:

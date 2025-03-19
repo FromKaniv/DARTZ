@@ -14,3 +14,4 @@ class Props:
     coeff: float = 1
     exponent: float = 1
     autoskip: bool = False
+    antidartz: bool = False
