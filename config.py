@@ -28,6 +28,7 @@ diffs = {
 players = {
     'Vova': Props(
         name = 'Vova',
+        antidartz = True,
     ),
 
     'Taras': Props(
