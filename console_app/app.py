@@ -47,9 +47,11 @@ class App:
             print(f'{WHITE}|{RESET} {'Звання:'.ljust(15)}{RESET}%s' % color_the_rank(player.stats['accuracy'], player.stats['rank']))
         else:
             moves_to_unlock = 4 - self.engine.move
-            print(f'{WHITE}|{RESET} {'Точність'.ljust(15)}{RED}🔒 {moves_to_unlock} ходів')
+            print(f'{WHITE}|{RESET} {'Точність:'.ljust(15)}{RED}🔒 {moves_to_unlock} ходів')
             print(f'{WHITE}|{RESET} {'До перемоги:'.ljust(15)}{RED}🔒 {moves_to_unlock} ходів')
             print(f'{WHITE}|{RESET} {'Звання:'.ljust(15)}{RED}🔒 {moves_to_unlock} ходів')
+
+        print(f'{WHITE}|{RESET} {'Монети:'.ljust(15)}{YELLOW}{player.stats['coins']}🪙')
 
     def output_stats(self):
         self.output_header()
