@@ -71,7 +71,7 @@ class Player:
             self.stats['reached'] = self.stats['score'] >= self.props.target
             self.stats['progress'] = self.stats['score'] / self.props.target
             self.stats['prev_progress'] = 0 if len(self.stats['scores']) == 1 else self.stats['scores'][-1] / self.props.target
-            self.stats['moves_to_win'] = round((self.props.target - self.stats['score']) / self.stats['avg'])
+            self.stats['moves_to_win'] = -1 if (self.stats['avg'] == 0) else round((self.props.target - self.stats['score']) / self.stats['avg'])
         else:
             self.stats['reached'] = self.stats['move'] >= self.props.target
             self.stats['progress'] = self.stats['move'] / self.props.target

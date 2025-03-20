@@ -106,8 +106,8 @@ class App:
                 clear()
                 print(f'{RED}[ ! ] Сталася помилка\n')
                 print(RED+str(e))
-                # print(RED+'\nДеталі:')
-                # traceback.print_exc()
+                print(RED+'\nДеталі:')
+                print(RED+traceback.format_exc())
                 input(f'{WHITE}Натисність ENTER щоб повернутися')
                 clear()
 
@@ -148,6 +148,10 @@ class App:
 
             case 'players':
                 self.show_info(', '.join([player.props.name for player in self.engine.players]))
+
+            case 'moves':
+                player = next((player for player in self.engine.players if player.props.name == command[1]), None)
+                self.show_info(player.scores)
 
             case _:
                 self.show_error('Такої команди не існує')
