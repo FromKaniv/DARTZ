@@ -11,6 +11,8 @@ RED = Style.BRIGHT + Fore.RED
 BLUE = Style.BRIGHT + Fore.BLUE
 WHITE = Style.BRIGHT + Fore.WHITE
 
+move_count_forms = ("хід", "ходи", "ходів")
+
 def avg(arr):
     return sum(arr) / len(arr)
 
@@ -43,3 +45,14 @@ def color_the_rank(accuracy, rank):
         color = BLUE
 
     return color + rank
+    
+def correct_word_form(number: int, word_forms: tuple) -> str:
+    if 11 <= number % 100 <= 19:
+        return f"{number} {word_forms[2]}"
+    last_digit = number % 10
+    if last_digit == 1:
+        return f"{number} {word_forms[0]}"
+    if 2 <= last_digit <= 4:
+        return f"{number} {word_forms[1]}"
+    return f"{number} {word_forms[2]}"
+

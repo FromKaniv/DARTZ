@@ -43,13 +43,14 @@ class App:
         if self.engine.move >= 4:
             print(f'{WHITE}|{RESET} {'Точність:'.ljust(15)}{WHITE}%s\t%s' % (convert_to_percents(player.stats['accuracy']), player.stats['avg_shot']))
             if player.props.target_type == 'score':
-                print(f'{WHITE}|{RESET} {'До перемоги:'.ljust(15)}{WHITE}{'∞' if player.stats['moves_to_win'] < 0 else '~'+str(player.stats['moves_to_win'])} ходів')
+                print(f'{WHITE}|{RESET} {"До перемоги:".ljust(15)}{WHITE}{"∞" if player.stats["moves_to_win"] < 0 else "~" + correct_word_form(player.stats["moves_to_win"], ("хід", "ходи", "ходів"))}')
             print(f'{WHITE}|{RESET} {'Звання:'.ljust(15)}{RESET}%s' % color_the_rank(player.stats['accuracy'], player.stats['rank']))
         else:
             moves_to_unlock = 4 - self.engine.move
-            print(f'{WHITE}|{RESET} {'Точність:'.ljust(15)}{RED}🔒 {moves_to_unlock} ходів')
-            print(f'{WHITE}|{RESET} {'До перемоги:'.ljust(15)}{RED}🔒 {moves_to_unlock} ходів')
-            print(f'{WHITE}|{RESET} {'Звання:'.ljust(15)}{RED}🔒 {moves_to_unlock} ходів')
+            moves_to_unlock_correct_form = correct_word_form(moves_to_unlock, ("хід", "ходи", "ходів"))
+            print(f'{WHITE}|{RESET} {'Точність:'.ljust(15)}{RED}🔒 {moves_to_unlock_correct_form}')
+            print(f'{WHITE}|{RESET} {'До перемоги:'.ljust(15)}{RED}🔒 {moves_to_unlock_correct_form}')
+            print(f'{WHITE}|{RESET} {'Звання:'.ljust(15)}{RED}🔒 {moves_to_unlock_correct_form}')
 
         print(f'{WHITE}|{RESET} {'Монети:'.ljust(15)}{YELLOW}{player.stats['coins']}🪙')
 
