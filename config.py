@@ -35,13 +35,13 @@ players = {
         name = 'Taras',
     ),
 
-    'dddddddddddddddddddddddddddddddddddddddddddddgvvvvvvvvddd': Props(
-        name = 'dddddddddddddddddddddddddddddddddddddddddddddgvvvvvvvvddd',
+    'Alpha': Props(
+        name = 'Alpha',
         bot = True,
-        diff = diffs['champion'],
+        diff = diffs['medium'],
         autoskip = False,
 
-    )
+    ),
 }
 
-players_will_play = ['Vova', 'Taras', 'dddddddddddddddddddddddddddddddddddddddddddddgvvvvvvvvddd']
+players_will_play = ['Vova', 'Taras', 'Alpha']

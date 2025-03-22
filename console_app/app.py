@@ -147,7 +147,13 @@ class App:
 
             case 'props':
                 player = next((player for player in self.engine.players if player.props.name == command[1]), None)
-                self.show_info(player.props)
+                if player:
+                    props = vars(player.props)
+                    formatted_props = "\n".join(f"{key} : {value!r}" for key, value in props.items())
+                    self.show_info(formatted_props)
+                else:
+                    self.show_error(f"Гравця не знайдено")
+
 
             case 'players':
                 self.show_info(', '.join([player.props.name for player in self.engine.players]))
