@@ -15,6 +15,8 @@ class App:
         print(f'{WHITE}Хід %s. Ходить %s' % (self.engine.move + 1, player.props.name))
 
     def output_progresses(self):
+        padding = len(max([player.props.name for player in self.engine.players], key=lambda i: len(i)))
+
         if all(player.props.target_type == 'moves' for player in self.engine.players) and \
            all(player.props.target == self.engine.players[0].props.target for player in self.engine.players):
             player = self.engine.who_moves
@@ -25,7 +27,7 @@ class App:
             return
 
         for pl in self.engine.players:
-            print(pl.props.name, '\t', loadbar(pl.stats['prev_progress'], pl.stats['progress'], 1, 50),
+            print(pl.props.name.ljust(padding), loadbar(pl.stats['prev_progress'], pl.stats['progress'], 1, 50),
                   convert_to_percents(pl.stats['progress']))
 
     def output_section(self):
@@ -200,6 +202,7 @@ class App:
 
     def output_leaderboard(self, show_score=True):
         leaderboard = self.engine.leaderboard
+        padding = len(max([player.props.name for player in self.engine.players], key=lambda i: len(i)))+1
 
         print(f'{WHITE}--- Таблиця балів ---')
         if show_score:
@@ -214,9 +217,9 @@ class App:
                     emoji = '   '
 
                 if player.stats['reached']:
-                    print(f'%s. {emoji}{YELLOW if i == 1 else WHITE}%s{WHITE}🏁 Фінішував 🏁' % (i, player.props.name.ljust(10)))
+                    print(f'%s. {emoji}{YELLOW if i == 1 else WHITE}%s{WHITE}🏁 Фінішував 🏁' % (i, player.props.name.ljust(padding)))
                 else:
-                    print(f'%s. {emoji}{YELLOW if i == 1 else WHITE}%s{WHITE}%s %s' % (i, player.props.name.ljust(10), round(player.stats['score'], 2), add_arrow(player.stats['income']) ))
+                    print(f'%s. {emoji}{YELLOW if i == 1 else WHITE}%s{WHITE}%s %s' % (i, player.props.name.ljust(padding), round(player.stats['score'], 2), add_arrow(player.stats['income']) ))
         else:
             for i, player in enumerate(leaderboard, 1):
                 if i == 1:
