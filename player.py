@@ -66,6 +66,7 @@ class Player:
         self.stats['progress'] = self.stats['score'] / self.props.target
         self.stats['prev_progress'] = 0 if len(self.stats['scores']) == 1 else self.stats['scores'][-1] / self.props.target
         self.stats['shoot_types'] = Counter(''.join(self.scores))
+        self.stats['most_common_move'], self.stats['most_common_move_count'] = Counter(self.scores).most_common(1)[0]
 
         if self.props.target_type == 'score':
             self.stats['reached'] = self.stats['score'] >= self.props.target
