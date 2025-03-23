@@ -54,7 +54,8 @@ class App:
             print(f'{WHITE}|{RESET} {'До перемоги:'.ljust(15)}{RED}🔒 {moves_to_unlock_correct_form}')
             print(f'{WHITE}|{RESET} {'Звання:'.ljust(15)}{RED}🔒 {moves_to_unlock_correct_form}')
 
-        print(f'{WHITE}|{RESET} {'Монети:'.ljust(15)}{YELLOW}{player.stats['coins']}🪙')
+        print(f'{WHITE}|{RESET} {'Монети:'.ljust(15)}{YELLOW}{player.stats['coins']}🪙\t{add_arrow(player.stats['coin_reward'])}')
+        print(f'{WHITE}|{RESET} {'Комбінація:'.ljust(15)}{WHITE if player.stats['coin_reward'] == 0 else BLUE}{player.stats['comb']}')
 
     def output_stats(self):
         self.output_header()

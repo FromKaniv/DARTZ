@@ -1,6 +1,7 @@
 from funcs import *
 from collections import Counter
 from config import ranks
+from combinations import is_comb
 
 class Player:
     def __init__(self, props):
@@ -65,7 +66,6 @@ class Player:
         self.stats['progress'] = self.stats['score'] / self.props.target
         self.stats['prev_progress'] = 0 if len(self.stats['scores']) == 1 else self.stats['scores'][-1] / self.props.target
         self.stats['shoot_types'] = Counter(''.join(self.scores))
-        self.stats['coins'] = self.stats['shoot_types']['9'] + 15*self.stats['shoot_types']['a']
 
         if self.props.target_type == 'score':
             self.stats['reached'] = self.stats['score'] >= self.props.target
@@ -76,6 +76,13 @@ class Player:
             self.stats['reached'] = self.stats['move'] >= self.props.target
             self.stats['progress'] = self.stats['move'] / self.props.target
             self.stats['prev_progress'] = max(0, (self.stats['move']-1) / self.props.target)
+
+        self.stats['coin_reward'], self.stats['comb'] = is_comb(self.scores[-1])
+
+        if 'coins' not in self.stats:
+            self.stats['coins'] = self.stats['coin_reward']
+        else:
+            self.stats['coins'] += self.stats['coin_reward']
 
     def __getitem__(self, key):
         return self.props[key]
