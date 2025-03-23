@@ -6,6 +6,8 @@ def save_progress(name, engine):
         os.remove('saves//'+name)
     except FileNotFoundError:
         pass
+
+    os.makedirs('saves', exist_ok=True)
     
     file = open('saves//'+name, 'ab')
     pickle.dump(engine, file)
