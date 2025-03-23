@@ -5,6 +5,9 @@ from funcs import *
 from console_app.loadbar import loadbar
 from graph import show_graph
 from progress_saver import save_progress, load_progress
+from collections import Counter
+
+PADDING = 20
 
 class App:
     def __init__(self, engine):
@@ -36,26 +39,27 @@ class App:
         crown = ' ' if (self.engine.move == 0 or self.engine.who_moves != self.engine.leaderboard[0]) else ' 👑 '
 
         print(f'{WHITE}---{crown}{player.props.name}{crown}---')
-        print(f'{WHITE}|{RESET} {'Бали:'.ljust(15)}{WHITE}%s\t%s' % (round(player.stats['score'], 2), add_arrow(player.stats['income'])))
-        print(f'{WHITE}|{RESET} {'СерЗар:'.ljust(15)}{WHITE}%s\t%s' % (
+        print(f'{WHITE}|{RESET} {'Бали:'.ljust(PADDING)}{WHITE}%s\t%s' % (round(player.stats['score'], 2), add_arrow(player.stats['income'])))
+        print(f'{WHITE}|{RESET} {'СерЗар:'.ljust(PADDING)}{WHITE}%s\t%s' % (
         round(player.stats['avg'], 2), add_arrow(player.stats['avg_delta'])))
-        print(f'{WHITE}|{RESET} {'Промахи:'.ljust(15)}{WHITE}%s/%s\t%s' % (
+        print(f'{WHITE}|{RESET} {'Промахи:'.ljust(PADDING)}{WHITE}%s/%s\t%s' % (
         player.stats['loses'], player.stats['shoots'], convert_to_percents(player.stats['lose_rate'])))
 
         if self.engine.move >= 4:
-            print(f'{WHITE}|{RESET} {'Точність:'.ljust(15)}{WHITE}%s\t%s' % (convert_to_percents(player.stats['accuracy']), player.stats['avg_shot']))
+            print(f'{WHITE}|{RESET} {'Точність:'.ljust(PADDING)}{WHITE}%s\t%s' % (convert_to_percents(player.stats['accuracy']), player.stats['avg_shot']))
             if player.props.target_type == 'score':
-                print(f'{WHITE}|{RESET} {"До перемоги:".ljust(15)}{WHITE}{"∞" if player.stats["moves_to_win"] < 0 else "~" + correct_word_form(player.stats["moves_to_win"], ("хід", "ходи", "ходів"))}')
-            print(f'{WHITE}|{RESET} {'Звання:'.ljust(15)}{RESET}%s' % color_the_rank(player.stats['accuracy'], player.stats['rank']))
+                print(f'{WHITE}|{RESET} {"До перемоги:".ljust(PADDING)}{WHITE}{"∞" if player.stats["moves_to_win"] < 0 else "~" + correct_word_form(player.stats["moves_to_win"], ("хід", "ходи", "ходів"))}')
+            print(f'{WHITE}|{RESET} {'Звання:'.ljust(PADDING)}{RESET}%s' % color_the_rank(player.stats['accuracy'], player.stats['rank']))
         else:
             moves_to_unlock = 4 - self.engine.move
             moves_to_unlock_correct_form = correct_word_form(moves_to_unlock, ("хід", "ходи", "ходів"))
-            print(f'{WHITE}|{RESET} {'Точність:'.ljust(15)}{RED}🔒 {moves_to_unlock_correct_form}')
-            print(f'{WHITE}|{RESET} {'До перемоги:'.ljust(15)}{RED}🔒 {moves_to_unlock_correct_form}')
-            print(f'{WHITE}|{RESET} {'Звання:'.ljust(15)}{RED}🔒 {moves_to_unlock_correct_form}')
+            print(f'{WHITE}|{RESET} {'Точність:'.ljust(PADDING)}{RED}🔒 {moves_to_unlock_correct_form}')
+            print(f'{WHITE}|{RESET} {'До перемоги:'.ljust(PADDING)}{RED}🔒 {moves_to_unlock_correct_form}')
+            print(f'{WHITE}|{RESET} {'Звання:'.ljust(PADDING)}{RED}🔒 {moves_to_unlock_correct_form}')
 
-        print(f'{WHITE}|{RESET} {'Монети:'.ljust(15)}{YELLOW}{player.stats['coins']}🪙\t{add_arrow(player.stats['coin_reward'])}')
-        print(f'{WHITE}|{RESET} {'Комбінація:'.ljust(15)}{WHITE if player.stats['coin_reward'] == 0 else BLUE}{player.stats['comb']}')
+        print(f'{WHITE}|{RESET} {'Монети:'.ljust(PADDING)}{YELLOW}{player.stats['coins']}🪙\t{add_arrow(player.stats['coin_reward'])}')
+        print(f'{WHITE}|{RESET} {'Минулий хід:'.ljust(PADDING)}{player.scores[-1]}\t{WHITE if player.stats['coin_reward'] == 0 else BLUE}{player.stats['comb']}')
+        print(f'{WHITE}|{RESET} {'Найчастіший хід:'.ljust(PADDING)}{player.stats['most_common_move']}\t{correct_word_form(player.stats['most_common_move_count'], ("раз", "раза", "разів"))}')
 
     def output_stats(self):
         self.output_header()

@@ -13,6 +13,20 @@ WHITE = Style.BRIGHT + Fore.WHITE
 
 move_count_forms = ("хід", "ходи", "ходів")
 
+def sort_move(move):
+    all_b = move.count('b')
+    all_a = move.count('a')
+
+    move = move.replace('a', '').replace('b', '')
+
+    move = list(move)
+    move = list(map(int, move))
+    move = list(sorted(move))
+    move = list(map(str, move))
+    move = ''.join(move)
+
+    return 'b'*all_b + ''.join(move) + 'a'*all_a
+
 def avg(arr):
     return sum(arr) / len(arr)
 

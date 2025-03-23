@@ -1,3 +1,5 @@
+from funcs import sort_move
+
 # КОМБІНАЦІЯ : (МОНЕТИ, НАЗВА КОМБ)
 
 COMBS = {
@@ -60,20 +62,6 @@ COMBS = {
     '228': (30, 'Агент 228'),
     'bb7': (1, 'Агент 007'),
 }
-
-def sort_move(move):
-    all_b = move.count('b')
-    all_a = move.count('a')
-
-    move = move.replace('a', '').replace('b', '')
-
-    move = list(move)
-    move = list(map(int, move))
-    move = list(sorted(move))
-    move = list(map(str, move))
-    move = ''.join(move)
-
-    return 'b'*all_b + ''.join(move) + 'a'*all_a
 
 def is_comb(move):
     return COMBS.get(sort_move(move), (0, 'Звичайний хід'))
