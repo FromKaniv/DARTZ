@@ -59,7 +59,7 @@ class App:
 
         print(f'{WHITE}|{RESET} {'Монети:'.ljust(PADDING)}{YELLOW}{player.stats['coins']}🪙\t{add_arrow(player.stats['coin_reward'])}')
         print(f'{WHITE}|{RESET} {'Минулий хід:'.ljust(PADDING)}{player.scores[-1]}\t{WHITE if player.stats['coin_reward'] == 0 else BLUE}{player.stats['comb']}')
-        print(f'{WHITE}|{RESET} {'Найчастіший хід:'.ljust(PADDING)}{player.stats['most_common_move']}\t{player.stats['most_common_move_count']} разів')
+        print(f'{WHITE}|{RESET} {'Найчастіший хід:'.ljust(PADDING)}{player.stats['most_common_move']}\t{correct_word_form(player.stats['most_common_move_count'], ("раз", "раза", "разів"))}')
 
     def output_stats(self):
         self.output_header()

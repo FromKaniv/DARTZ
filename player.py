@@ -16,6 +16,8 @@ class Player:
     def make_move(self, res):
         if len(res) > self.props.darts:
             raise ValueError(f'Цей гравець кидає {self.props.darts} дротиків за один хід!')
+        res = sort_move(res)
+
         self.scores.append(self.fill_with_b(res))
         self.update_stats()
 
