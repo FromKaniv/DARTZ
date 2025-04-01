@@ -25,7 +25,7 @@ class Engine:
 
     def make_move(self, res=''):
         for symbol in res:
-            if symbol not in '123456789ab':
+            if symbol not in '123456789aAb𒅒':
                 raise ValueError('Невірний символ: %s' % symbol)
 
         if self.who_moves.props.bot:

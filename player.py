@@ -16,7 +16,10 @@ class Player:
     def make_move(self, res):
         if len(res) > self.props.darts:
             raise ValueError(f'Цей гравець кидає {self.props.darts} дротиків за один хід!')
-        res = sort_move(res)
+        try:
+            res = sort_move(res)
+        except:
+            pass
 
         self.scores.append(self.fill_with_b(res))
         self.update_stats()
@@ -31,6 +34,10 @@ class Player:
                 score += self.props.center
             elif symbol == 'b':
                 score += self.props.lose
+            elif symbol == 'A':
+                score += self.props.center*100
+            elif symbol == '𒅒':
+                score += self.props.center*10000
             elif symbol.isdigit:
                 score += (10-int(symbol) if self.props.antidartz else int(symbol)) ** self.props.exponent * self.props.coeff
 
@@ -43,7 +50,7 @@ class Player:
             for symbol in score:
                 if symbol == 'b':
                     shoots.append(0)
-                elif symbol == 'a':
+                elif symbol in 'aA𒅒':
                     shoots.append(10)
                 else:
                     shoots.append(int(symbol))
@@ -80,7 +87,7 @@ class Player:
             self.stats['progress'] = self.stats['move'] / self.props.target
             self.stats['prev_progress'] = max(0, (self.stats['move']-1) / self.props.target)
 
-        self.stats['coin_reward'], self.stats['comb'] = is_comb(self.scores[-1])
+        self.stats['coin_reward'], self.stats['comb'] = (10000, 'Незвичайний хід') if 'A' in self.scores[-1] or '𒅒' in self.scores[-1] else is_comb(self.scores[-1])
 
         if 'coins' not in self.stats:
             self.stats['coins'] = self.stats['coin_reward']
